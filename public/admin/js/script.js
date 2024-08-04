@@ -147,3 +147,45 @@ if(removeButton){
     })
 }
 // end remove upload-image
+const sort = document.querySelector("[sort]");
+console.log(sort);
+
+if (sort) {
+    let url = new URL(window.location.href);
+
+    const sortSelect = sort.querySelector("[sort-select]");
+    const sortClear = sort.querySelector("[sort-clear]");
+
+    sortSelect.addEventListener("change", (e) => {
+        console.log(e.target.value);
+        const value = e.target.value;
+
+        const [sortKey, sortValue] = value.split("-");
+
+        url.searchParams.set("sortKey", sortKey);
+        url.searchParams.set("sortValue", sortValue);
+
+        window.location.href = url.href;
+    })
+
+    sortClear.addEventListener("click", () => {
+        url.searchParams.delete("sortKey");
+        url.searchParams.delete("sortValue");
+        window.location.href = url.href;
+    });
+
+
+    // Thêm giá trị chọn mặt định cho ô selected
+    const sortKey = url.searchParams.get("sortKey");
+    const sortValue = url.searchParams.get("sortValue");
+
+    if (sortKey && sortValue) {
+
+        const stringSort = `${sortKey}-${sortValue}`;
+
+        const optionSelect = sortSelect.querySelector(`option[value='${stringSort}']`);
+
+        optionSelect.selected = true;
+    }
+}
+// END Sort

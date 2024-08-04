@@ -1,8 +1,30 @@
 const homeRouter = require("./home.router")
 const productRouter = require("./product.router")
-
+const categoryMiddleware = require("../../middlewares/client/category.middleware")
+const cartIDMiddleware = require("../../middlewares/client/cart.middlerware")
+const searchRouter = require("./search.router")
+const cartRouter = require("./cart.router")
+const checkoutRouter = require("./checkout.router")
+const userRouter = require("./user.router")
+const userMiddleware = require("../../middlewares/client/user.middleware")
+const settingMiddleware = require("../../middlewares/client/setting.middleware")
+const Chatrouter = require("./chat.router")
+const authenMiddleware = require("../../middlewares/client/auth.middleware")
+const usersRouter = require("./users.router")
+const roomChat = require("./rooms-chat.router")
 module.exports = (app)=>{
+    app.use(settingMiddleware.SettingGeneral)
+    app.use(cartIDMiddleware.cardId)
+    app.use(categoryMiddleware.category)
+    app.use(userMiddleware.infoUser)
     app.use("/", homeRouter);
     app.use("/products", productRouter);
+    app.use("/search", searchRouter)
+    app.use("/cart", cartRouter)
+    app.use("/checkout",checkoutRouter)
+    app.use("/user", userRouter)
+    app.use("/chat",authenMiddleware.requireAuth, Chatrouter)
+    app.use("/users", authenMiddleware.requireAuth, usersRouter)
+    app.use("/rooms-chat", authenMiddleware.requireAuth,roomChat)
 }
 

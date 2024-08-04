@@ -1,3 +1,19 @@
 extends ../../layouts/default.pug
+include ../../mixin/box-head.pug
+include ../../mixin/product-layout.pug
+
 block main
-    h1 trang chu
+  if(productsFeatured.length > 0)
+    .container.my-3
+      .row
+        .col-12
+          +box-head("Sản phẩm nổi bật")
+      +product-grid(productsFeatured)
+
+  if(productsNew.length > 0)
+    .container.my-3
+      .row
+        .col-12
+          +box-head("Sản phẩm mới")
+
+      +product-grid(productsNew)

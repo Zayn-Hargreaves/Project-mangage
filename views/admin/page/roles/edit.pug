@@ -1,0 +1,39 @@
+extends ../../layouts/default.pug 
+include ../../mixin/alert.pug
+
+block main 
+    if(role.permissions.includes("roles_edit"))
+        h1(class="mb-4") chinh sua nhom quyen
+        +alert-success(5000)
+        +alert-error(5000)
+        form(
+            action=`${prefixAdmin}/roles/edit/${data.id}?_method=PATCH`
+            method="POST"
+        )
+            div(class="form-group")
+                label(for="title") Tiêu đề
+                input(
+                    type="text"
+                    class="form-control"
+                    id="title"
+                    name="title"
+                    value=data.title
+                    required
+                )
+            div(class="form-group")
+                label(for="desc") Mô tả
+                input(
+                    type="text"
+                    class="form-control"
+                    id="desc"
+                    name="description"
+                    value=data.description
+                    required
+                )
+            div(class="form-group")
+                button(
+                    type="submit"
+                    class="btn btn-primary"
+                ) Tạo mới
+        script(src="/admin/js/script.js") 
+        script(src="/admin/js/product.js") 

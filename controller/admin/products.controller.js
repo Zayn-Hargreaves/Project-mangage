@@ -235,6 +235,6 @@ module.exports.detail = async(req,res) =>{
         })
     } catch (error) {
         req.flash("error", `Không tạo được sản phẩm này`)
-        res.redirect(`${systemConfig.prefixAdmin}/products`)
+        res.redirect(`/${systemConfig.prefixAdmin}/products`)
     }
 }

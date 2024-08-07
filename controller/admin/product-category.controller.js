@@ -64,7 +64,7 @@ module.exports.createPost = async (req, res) =>{
         }
         const record = new productCategory(req.body)
         await record.save();
-        res.redirect(`${systemConfig.prefixAdmin}/products-category`)
+        res.redirect(`/${systemConfig.prefixAdmin}/products-category`)
     }else{
         return;
     }
@@ -130,7 +130,7 @@ module.exports.edit = async(req,res) =>{
         })
     } catch (error) {
         req.flash("error", `Không tạo được sản phẩm này`)
-        res.redirect(`${systemConfig.prefixAdmin}/products-category`)
+        res.redirect(`/${systemConfig.prefixAdmin}/products-category`)
     }
 }
 
@@ -168,6 +168,6 @@ module.exports.detail = async(req,res) =>{
         })
     } catch (error) {
         req.flash("error", `Không tạo được sản phẩm này`)
-        res.redirect(`${systemConfig.prefixAdmin}/products-category`)
+        res.redirect(`/${systemConfig.prefixAdmin}/products-category`)
     }
 }   

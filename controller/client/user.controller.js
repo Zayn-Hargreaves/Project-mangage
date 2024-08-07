@@ -167,10 +167,10 @@ module.exports.otpPasswordPost = async(req, res) =>{
         email:email
     })
     const token = generateToken(user);
-    user.token = token
+    user.tokenUser = token
     res.cookie("tokenUser", token)
     user.save()
-    res.redirect("/user/password/reset")
+    res.redirect("/user/password/reset-password")
 }
 
 module.exports.resetPassword = (req, res) =>{
@@ -208,7 +208,7 @@ module.exports.editPatch = async(req,res)=>{
         deleted:false
     })
     if(emailExist){
-        res.flash("error", `Email ${req.body.email} đã tồn tại`)
+        req.flash("error", `Email ${req.body.email} đã tồn tại`)
     }else{
         if(req.body.password){
             req.body.password = md5(req.body.password)

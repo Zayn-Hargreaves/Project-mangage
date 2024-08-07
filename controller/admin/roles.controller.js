@@ -40,7 +40,7 @@ module.exports.edit = async (req, res) => {
             data: data
         })
     } catch (error) {
-        res.redirect(`${systemConfig.prefixAdmin}/roles`)
+        res.redirect(`/${systemConfig.prefixAdmin}/roles`)
     }
 }
 module.exports.editPatch = async (req, res) => {
@@ -65,7 +65,7 @@ module.exports.permissions = async (req, res) => {
         deleted: false
     }
     const records = await roles.find(find)
-    res.render("admin/page//roles/permissions", {
+    res.render("admin/page/roles/permissions", {
         pageTitle: "Trang phân quyền",
         records: records
     })

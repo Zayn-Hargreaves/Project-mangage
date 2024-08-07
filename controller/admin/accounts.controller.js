@@ -40,7 +40,7 @@ module.exports.createPost = async (req, res) => {
         req.body.password = md5(req.body.password);
         const records = new Accounts(req.body);
         await records.save();
-        res.redirect(`${systemConfig.prefixAdmin}/accounts`);
+        res.redirect(`/${systemConfig.prefixAdmin}/accounts`);
     }
 }
 
@@ -63,7 +63,7 @@ module.exports.edit = async (req, res) => {
         })
     } catch (error) {
         req.flash("error", `không có tài khoản`)
-        res.redirect(`${systemConfig.prefixAdmin}/accounts`)
+        res.redirect(`/${systemConfig.prefixAdmin}/accounts`)
     }
 }
 

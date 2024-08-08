@@ -40,7 +40,7 @@ module.exports.edit = async (req, res) => {
             data: data
         })
     } catch (error) {
-        res.redirect(`/${systemConfig.prefixAdmin}/roles`)
+        res.redirect(`${systemConfig.prefixAdmin}/roles`)
     }
 }
 module.exports.editPatch = async (req, res) => {

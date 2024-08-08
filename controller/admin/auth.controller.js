@@ -12,7 +12,7 @@ const generateToken = user =>{
 }
 module.exports.login = async(req, res) => {
     if(req.cookies.token){
-        res.redirect(`/${systemConfig.prefixAdmin}/dashboard`)
+        res.redirect(`${systemConfig.prefixAdmin}/dashboard`)
     }else{
         res.render("admin/page/auth/login", {
             pageTitle: "Trang tổng quan"
@@ -44,11 +44,11 @@ module.exports.loginPost = async(req, res) =>{
             user.token = token
             await user.save()
             res.cookie("token", user.token);
-            res.redirect(`/${systemConfig.prefixAdmin}/dashboard`);
+            res.redirect(`${systemConfig.prefixAdmin}/dashboard`);
         }
     }
 }
 module.exports.logout = async (req, res, next) => {
     res.clearCookie("token");
-    res.redirect(`/${systemConfig.prefixAdmin}/auth/login`);
+    res.redirect(`${systemConfig.prefixAdmin}/auth/login`);
 }

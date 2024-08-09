@@ -34,7 +34,7 @@ module.exports.createPost = async (req, res) => {
         deleted:false
     })
     if(emailExist){
-        res.flash("error", `email ${req.body.email} đã tồn tại`)
+        req.flash("error", `email ${req.body.email} đã tồn tại`)
         res.redirect("back")
     }else{
         req.body.password = md5(req.body.password);
@@ -78,8 +78,8 @@ module.exports.editPatch = async(req, res) =>{
         req.flash("error", `email ${req.body.email} đã tồn tại`)
         res.redirect("back")
     }else{
-        if(req.file){
-            req.body.avatar= `/uploads/${req.file.filename}`
+        if(!req.body.avatar){
+            req.body.avatar= ""
         }
         if(req.body.password){
            req.body.password = md5(req.body.password);
@@ -90,10 +90,10 @@ module.exports.editPatch = async(req, res) =>{
             await Accounts.updateOne({
                 _id:id,
             },req.body)
-            req.flash("success", `cập nhật sản phẩm thành công`)
-            res.redirect("back")
+            req.flash("success", `cập nhật thành công`)
+            res.redirect(`${systemConfig.prefixAdmin}/accounts`)
         } catch (error) {
-            req.flash("error", `cập nhật sản phẩm thất bại`)
+            req.flash("error", `cập nhật thất bại`)
             res.redirect("back")
         } 
     }

@@ -27,7 +27,7 @@ module.exports.loginPost = async(req, res) =>{
         deleted:false       
     })
     if(!user){
-        res.flash("error","Email không tồn tại")
+        req.flash("error","Email không tồn tại")
         res.redirect("back")
         return
     }else{
